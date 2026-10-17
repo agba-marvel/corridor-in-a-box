@@ -5,18 +5,17 @@ on:
   pull_request:
 
 jobs:
-  # Scans the diff (PRs) or full history (pushes to main) for committed secrets.
-  # The repo handles signing seeds (CORRIDOR_SIGNER_SECRET, ATTESTER_SECRET), so a
-  # leaked Stellar `S…` seed must fail CI. Rules live in .gitleaks.toml.
   secret-scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .gitleaks.toml
 
   # The Soroban contracts are a separate toolchain from the TypeScript monorepo,
   # so they get their own job: fmt, clippy-as-errors, the full test suite, and a
