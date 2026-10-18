@@ -1,0 +1,18 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "fix/issue-278-add-secret-scanning-gitleaks-to-ci",
+    "main",
+    "origin"
+  ],
+  "parent": {
+    "fix/issue-278-add-secret-scanning-gitleaks-to-ci": "main",
+    "main": null,
+    "origin": "main"
+  },
+  "order": [
+    "main",
+    "fix/issue-278-add-secret-scanning-gitleaks-to-ci",
+    "origin"
+  ]
+}
