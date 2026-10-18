@@ -12,10 +12,12 @@ jobs:
         with:
           fetch-depth: 0
       - name: gitleaks
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_CONFIG: .gitleaks.toml
+          # Fail the job only; no PR comments, so the token needs no write scope.
+          GITLEAKS_ENABLE_COMMENTS: "false"
 
   # The Soroban contracts are a separate toolchain from the TypeScript monorepo,
   # so they get their own job: fmt, clippy-as-errors, the full test suite, and a
